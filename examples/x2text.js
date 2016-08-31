@@ -9,10 +9,13 @@ args.forEach(function (item) {
 
     stream.once('open', function (fd) {
         require("./" + item).forEach(function (e) {
-            stream.write(e.text);
-            stream.write("\n");
+            if (e.text) {
+                stream.write(e.text);
+                stream.write("\n");
+            }
         }, this);
         stream.end();
+        console.log('Saved!', output);
     });
 
 });
